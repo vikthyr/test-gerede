@@ -2,13 +2,14 @@ FROM php:8.4-apache
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     git \
     unzip \
-    php8.4-zip
-RUN apt-get install git
-RUN apt-get install unzip
-RUN apt-get install php8.4-zip
+    zip
 RUN docker-php-ext-install pdo pdo_mysql
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . .
+RUN composer update
 EXPOSE 8000
-CMD php -S 0.0.0.0:8000 -t public
+#RUN chmod +x ./entrypoint.sh
+#ENTRYPOINT ["./entrypoint.sh"]
+RUN php artisan migrate --force
+CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
