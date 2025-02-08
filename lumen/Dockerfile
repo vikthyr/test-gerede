@@ -9,7 +9,5 @@ WORKDIR /var/www/html
 COPY . .
 RUN composer update
 EXPOSE 8000
-#RUN chmod +x ./entrypoint.sh
-#ENTRYPOINT ["./entrypoint.sh"]
 RUN php artisan migrate --force
 CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
