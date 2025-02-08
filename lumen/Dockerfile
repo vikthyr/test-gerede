@@ -1,6 +1,8 @@
 FROM php:8.4-apache
-RUN apt-get update
-RUN apt-get upgrade
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+    git \
+    unzip \
+    php8.4-zip
 RUN apt-get install git
 RUN apt-get install unzip
 RUN apt-get install php8.4-zip
