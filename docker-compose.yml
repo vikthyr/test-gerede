@@ -3,7 +3,7 @@ services:
     build: ./lumen
     container_name: lumen
     ports:
-      - 8000:8000
+      - 8001:8001
     env_file:
       - path: ./lumen/.env
         required: true
