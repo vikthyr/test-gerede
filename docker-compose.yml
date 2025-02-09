@@ -5,6 +5,8 @@ services:
       container_name: nginx
       ports:
         - 80:80
+      volumes:
+      - ./nginx/html:/usr/share/nginx/html
       depends_on:
         - lumen
       networks:
