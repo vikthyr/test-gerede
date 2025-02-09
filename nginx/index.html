@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend com Nginx</title>
+</head>
+<body>
+    <h1>Teste de Conexão com Backend</h1>
+    <button onclick="chamarBackend()">Enviar Requisição</button>
+    <p id="resposta"></p>
+
+    <script>
+        function chamarBackend() {
+            fetch('/api/teste')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('resposta').innerText = data;
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    document.getElementById('resposta').innerText = 'Erro ao conectar ao backend';
+                });
+        }
+    </script>
+</body>
+</html>

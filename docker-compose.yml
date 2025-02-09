@@ -1,9 +1,20 @@
 services:
+
+  nginx:
+      build: ./nginx
+      container_name: nginx
+      ports:
+        - 80:80
+      depends_on:
+        - lumen
+      networks:
+      - app_network
+
   lumen:
     build: ./lumen
     container_name: lumen
     ports:
-      - 8001:8001
+      - 8000:8000
     env_file:
       - path: ./lumen/.env
         required: true
@@ -11,6 +22,8 @@ services:
       - mysql
     volumes:
       - ./lumen:/var/www/html
+    networks:
+      - app_network
     
   mysql:
     image: mysql:8.4
@@ -24,6 +37,12 @@ services:
       - 3306:3306
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - app_network
 
 volumes:
   mysql_data:
+
+networks:
+  app_network:
+    driver: bridge

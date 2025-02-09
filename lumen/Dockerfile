@@ -14,6 +14,6 @@ RUN chmod +x entrypoint.sh
 RUN dos2unix entrypoint.sh
 RUN composer install
 RUN composer update
-EXPOSE 8001
+EXPOSE 8000
 ENTRYPOINT ["sh", "entrypoint.sh"]
 CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
